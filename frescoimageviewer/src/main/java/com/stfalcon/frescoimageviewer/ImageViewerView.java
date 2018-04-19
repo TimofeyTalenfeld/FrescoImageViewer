@@ -61,6 +61,7 @@ class ImageViewerView extends RelativeLayout
     private boolean isSwipeToDismissAllowed = true;
 
     private boolean isOverlayViewVisible = true;
+    private ImageViewer.OnToggleOverlayViewListener onToggleOverlayViewListener;
 
     public ImageViewerView(Context context) {
         super(context);
@@ -223,10 +224,16 @@ class ImageViewerView extends RelativeLayout
         pageChangeListener.onPageSelected(pager.getCurrentItem());
     }
 
-    void toggleOverlayView() {
+    boolean toggleOverlayView() {
         if (overlayView != null && !isOverlayWasClicked) {
             isOverlayViewVisible = AnimationUtils.animateVisibility(overlayView);
+            if (onToggleOverlayViewListener != null) onToggleOverlayViewListener.onToggle(isOverlayViewVisible);
         }
+        return isOverlayViewVisible;
+    }
+
+    void setOnToggleOverlayViewListener(ImageViewer.OnToggleOverlayViewListener listener) {
+        this.onToggleOverlayViewListener = listener;
     }
 
     boolean isOverlayViewVisible() {

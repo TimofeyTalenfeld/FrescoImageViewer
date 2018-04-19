@@ -101,6 +101,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
                 }
             }
         });
+        viewer.setOnToggleOverlayViewListener(builder.onToggleOverlayViewListener);
     }
 
     /**
@@ -161,6 +162,13 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
      */
     public interface OnDismissListener {
         void onDismiss();
+    }
+
+    /**
+     * Interface definition for a callback to be invoked when overlay view was toggled
+     */
+    public interface OnToggleOverlayViewListener {
+        void onToggle(boolean isVisible);
     }
 
     private @StyleRes int getDialogStyle() {
@@ -225,6 +233,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         private boolean shouldStatusBarHide = true;
         private boolean isZoomingAllowed = true;
         private boolean isSwipeToDismissAllowed = true;
+        private OnToggleOverlayViewListener onToggleOverlayViewListener;
 
         /**
          * Constructor using a context and images urls array for this builder and the {@link ImageViewer} it creates.
@@ -427,6 +436,11 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
          */
         public Builder setCustomDraweeHierarchyBuilder(GenericDraweeHierarchyBuilder customHierarchyBuilder) {
             this.customHierarchyBuilder = customHierarchyBuilder;
+            return this;
+        }
+
+        public Builder setOnToggleOverlayViewListener(OnToggleOverlayViewListener listener) {
+            this.onToggleOverlayViewListener = listener;
             return this;
         }
 
