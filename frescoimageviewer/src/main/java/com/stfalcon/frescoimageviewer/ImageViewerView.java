@@ -224,12 +224,13 @@ class ImageViewerView extends RelativeLayout
         pageChangeListener.onPageSelected(pager.getCurrentItem());
     }
 
-    boolean toggleOverlayView() {
+    void toggleOverlayView(boolean isUserAction) {
         if (overlayView != null && !isOverlayWasClicked) {
             isOverlayViewVisible = AnimationUtils.animateVisibility(overlayView);
-            if (onToggleOverlayViewListener != null) onToggleOverlayViewListener.onToggle(isOverlayViewVisible);
+            if (onToggleOverlayViewListener != null && isUserAction) {
+                onToggleOverlayViewListener.onToggle(isOverlayViewVisible);
+            }
         }
-        return isOverlayViewVisible;
     }
 
     void setOnToggleOverlayViewListener(ImageViewer.OnToggleOverlayViewListener listener) {
@@ -273,7 +274,7 @@ class ImageViewerView extends RelativeLayout
 
     private void onClick(MotionEvent event, boolean isOverlayWasClicked) {
         if (overlayView != null && !isOverlayWasClicked) {
-            toggleOverlayView();
+            toggleOverlayView(true);
             super.dispatchTouchEvent(event);
         }
     }
