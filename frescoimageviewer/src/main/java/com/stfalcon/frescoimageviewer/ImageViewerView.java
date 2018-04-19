@@ -60,6 +60,8 @@ class ImageViewerView extends RelativeLayout
     private boolean isZoomingAllowed = true;
     private boolean isSwipeToDismissAllowed = true;
 
+    private boolean isOverlayViewVisible = true;
+
     public ImageViewerView(Context context) {
         super(context);
         init();
@@ -221,6 +223,16 @@ class ImageViewerView extends RelativeLayout
         pageChangeListener.onPageSelected(pager.getCurrentItem());
     }
 
+    void toggleOverlayView() {
+        if (overlayView != null && !isOverlayWasClicked) {
+            isOverlayViewVisible = AnimationUtils.animateVisibility(overlayView);
+        }
+    }
+
+    boolean isOverlayViewVisible() {
+        return isOverlayViewVisible;
+    }
+
     private void setStartPosition(int position) {
         pager.setCurrentItem(position);
     }
@@ -254,7 +266,7 @@ class ImageViewerView extends RelativeLayout
 
     private void onClick(MotionEvent event, boolean isOverlayWasClicked) {
         if (overlayView != null && !isOverlayWasClicked) {
-            AnimationUtils.animateVisibility(overlayView);
+            toggleOverlayView();
             super.dispatchTouchEvent(event);
         }
     }

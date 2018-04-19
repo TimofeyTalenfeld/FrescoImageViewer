@@ -112,6 +112,20 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
     }
 
     /**
+     * Toggle visibility of overlay view
+     */
+    public void toggleOverlaView() {
+        viewer.toggleOverlayView();
+    }
+
+    /**
+     * @return true if overlay view is visible, false otherwise
+     */
+    public boolean isOverlayViewVisible() {
+        return viewer.isOverlayViewVisible();
+    }
+
+    /**
      * Resets image on {@literal KeyEvent.KEYCODE_BACK} to normal scale if needed, otherwise - hide the viewer.
      */
     @Override

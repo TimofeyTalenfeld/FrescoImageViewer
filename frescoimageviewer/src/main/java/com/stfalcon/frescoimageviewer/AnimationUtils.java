@@ -14,7 +14,10 @@ final class AnimationUtils {
         throw new AssertionError();
     }
 
-    static void animateVisibility(final View view) {
+    /**
+     * @return true if view is visible after animation, false otherwise
+     */
+    static boolean animateVisibility(final View view) {
         final boolean isVisible = view.getVisibility() == View.VISIBLE;
         float from = isVisible ? 1.0f : 0.0f,
                 to = isVisible ? 0.0f : 1.0f;
@@ -32,6 +35,7 @@ final class AnimationUtils {
         } else view.setVisibility(View.VISIBLE);
 
         animation.start();
+        return !isVisible;
     }
 
 }
