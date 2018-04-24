@@ -226,9 +226,9 @@ class ImageViewerView extends RelativeLayout
 
     void toggleOverlayView(boolean isUserAction) {
         if (overlayView != null && !isOverlayWasClicked) {
-            if (onToggleOverlayViewListener == null) {
+            if (onToggleOverlayViewListener == null || !isUserAction) {
                 isOverlayViewVisible = AnimationUtils.animateVisibility(overlayView);
-            } else if (isUserAction) {
+            } else {
                 onToggleOverlayViewListener.onToggle(isOverlayViewVisible);
             }
         }
