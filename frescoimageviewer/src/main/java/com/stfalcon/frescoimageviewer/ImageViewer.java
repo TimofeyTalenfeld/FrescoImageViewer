@@ -81,6 +81,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         viewer.setImageMargin(builder.imageMarginPixels);
         viewer.setContainerPadding(builder.containerPaddingPixels);
         viewer.setOnViewBoundListener(builder.onViewBoundListener);
+        viewer.setOnItemClickListener(builder.onItemClickListener);
         viewer.setUrls(builder.dataSet, builder.startPosition);
         viewer.setPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -177,6 +178,10 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         void onBound(ZoomableDraweeView view, int position);
     }
 
+    public interface OnItemClickListener {
+        void onItemClicked(int position);
+    }
+
     private @StyleRes int getDialogStyle() {
         return builder.shouldStatusBarHide
                 ? android.R.style.Theme_Translucent_NoTitleBar_Fullscreen
@@ -241,6 +246,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         private boolean isSwipeToDismissAllowed = true;
         private OnToggleOverlayViewListener onToggleOverlayViewListener;
         private OnViewBoundListener onViewBoundListener;
+        private OnItemClickListener onItemClickListener;
 
         /**
          * Constructor using a context and images urls array for this builder and the {@link ImageViewer} it creates.
@@ -453,6 +459,11 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
 
         public Builder setOnViewBoundListener(OnViewBoundListener listener) {
             this.onViewBoundListener = listener;
+            return this;
+        }
+
+        public Builder setOnClickListener(OnItemClickListener onClickListener) {
+            this.onItemClickListener = onClickListener;
             return this;
         }
 
