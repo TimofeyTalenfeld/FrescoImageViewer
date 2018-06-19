@@ -153,10 +153,12 @@ class ImageViewerView extends RelativeLayout
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
                 if (pager.isScrolled()) {
-                    boolean toggled = onClick(e, isOverlayWasClicked);
-                    if (!toggled && onItemClickListener != null) {
-                        onItemClickListener.onItemClicked(pager.getCurrentItem());
+                    boolean performed = false;
+                    if (onItemClickListener != null) {
+                        performed = onItemClickListener.onItemClicked(pager.getCurrentItem());
                     }
+
+                    if (!performed) onClick(e, isOverlayWasClicked);
                 }
                 return false;
             }
@@ -287,13 +289,11 @@ class ImageViewerView extends RelativeLayout
         isOverlayWasClicked = dispatchOverlayTouch(event);
     }
 
-    private boolean onClick(MotionEvent event, boolean isOverlayWasClicked) {
+    private void onClick(MotionEvent event, boolean isOverlayWasClicked) {
         if (overlayView != null && !isOverlayWasClicked) {
             toggleOverlayView(true);
             super.dispatchTouchEvent(event);
-            return true;
         }
-        return false;
     }
 
     private boolean dispatchOverlayTouch(MotionEvent event) {

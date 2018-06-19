@@ -179,7 +179,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
     }
 
     public interface OnItemClickListener {
-        void onItemClicked(int position);
+        boolean onItemClicked(int position);
     }
 
     private @StyleRes int getDialogStyle() {
