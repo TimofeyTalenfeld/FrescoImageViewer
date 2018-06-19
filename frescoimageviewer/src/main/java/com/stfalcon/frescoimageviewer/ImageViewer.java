@@ -80,6 +80,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         viewer.setOverlayView(builder.overlayView);
         viewer.setImageMargin(builder.imageMarginPixels);
         viewer.setContainerPadding(builder.containerPaddingPixels);
+        viewer.setOnViewBoundListener(builder.onViewBoundListener);
         viewer.setUrls(builder.dataSet, builder.startPosition);
         viewer.setPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -103,7 +104,6 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
             }
         });
         viewer.setOnToggleOverlayViewListener(builder.onToggleOverlayViewListener);
-        viewer.setOnViewBoundListener(builder.onViewBoundListener);
     }
 
     /**
