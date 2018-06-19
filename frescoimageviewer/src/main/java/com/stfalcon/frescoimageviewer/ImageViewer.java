@@ -32,6 +32,7 @@ import android.view.View;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.stfalcon.frescoimageviewer.drawee.ZoomableDraweeView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +103,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
             }
         });
         viewer.setOnToggleOverlayViewListener(builder.onToggleOverlayViewListener);
+        viewer.setOnViewBoundListener(builder.onViewBoundListener);
     }
 
     /**
@@ -171,6 +173,10 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         void onToggle(boolean isVisible);
     }
 
+    public interface OnViewBoundListener {
+        void onBound(ZoomableDraweeView view, int position);
+    }
+
     private @StyleRes int getDialogStyle() {
         return builder.shouldStatusBarHide
                 ? android.R.style.Theme_Translucent_NoTitleBar_Fullscreen
@@ -234,6 +240,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         private boolean isZoomingAllowed = true;
         private boolean isSwipeToDismissAllowed = true;
         private OnToggleOverlayViewListener onToggleOverlayViewListener;
+        private OnViewBoundListener onViewBoundListener;
 
         /**
          * Constructor using a context and images urls array for this builder and the {@link ImageViewer} it creates.
@@ -441,6 +448,11 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
 
         public Builder setOnToggleOverlayViewListener(OnToggleOverlayViewListener listener) {
             this.onToggleOverlayViewListener = listener;
+            return this;
+        }
+
+        public Builder setOnViewBoundListener(OnViewBoundListener listener) {
+            this.onViewBoundListener = listener;
             return this;
         }
 

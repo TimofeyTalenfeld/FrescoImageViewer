@@ -29,6 +29,7 @@ class ImageViewerAdapter
 
     private Context context;
     private ImageViewer.DataSet<?> dataSet;
+    private ImageViewer.OnViewBoundListener onViewBoundListener;
     private HashSet<ImageViewHolder> holders;
     private ImageRequestBuilder imageRequestBuilder;
     private GenericDraweeHierarchyBuilder hierarchyBuilder;
@@ -37,13 +38,15 @@ class ImageViewerAdapter
     ImageViewerAdapter(Context context, ImageViewer.DataSet<?> dataSet,
                        ImageRequestBuilder imageRequestBuilder,
                        GenericDraweeHierarchyBuilder hierarchyBuilder,
-                       boolean isZoomingAllowed) {
+                       boolean isZoomingAllowed,
+                       ImageViewer.OnViewBoundListener onViewBoundListener) {
         this.context = context;
         this.dataSet = dataSet;
         this.holders = new HashSet<>();
         this.imageRequestBuilder = imageRequestBuilder;
         this.hierarchyBuilder = hierarchyBuilder;
         this.isZoomingAllowed = isZoomingAllowed;
+        this.onViewBoundListener = onViewBoundListener;
     }
 
     @Override
@@ -122,6 +125,8 @@ class ImageViewerAdapter
             setController(dataSet.format(position));
 
             drawee.setOnScaleChangeListener(this);
+
+            onViewBoundListener.onBound(drawee, position);
         }
 
         @Override

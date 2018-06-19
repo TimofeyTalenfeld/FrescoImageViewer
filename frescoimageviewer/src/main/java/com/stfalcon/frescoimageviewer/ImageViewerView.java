@@ -62,6 +62,7 @@ class ImageViewerView extends RelativeLayout
 
     private boolean isOverlayViewVisible = true;
     private ImageViewer.OnToggleOverlayViewListener onToggleOverlayViewListener;
+    private ImageViewer.OnViewBoundListener onViewBoundListener;
 
     public ImageViewerView(Context context) {
         super(context);
@@ -80,7 +81,8 @@ class ImageViewerView extends RelativeLayout
 
     public void setUrls(ImageViewer.DataSet<?> dataSet, int startPosition) {
         adapter = new ImageViewerAdapter(
-                getContext(), dataSet, customImageRequestBuilder, customDraweeHierarchyBuilder, isZoomingAllowed);
+                getContext(), dataSet, customImageRequestBuilder, customDraweeHierarchyBuilder, isZoomingAllowed, onViewBoundListener
+        );
         pager.setAdapter(adapter);
         setStartPosition(startPosition);
     }
@@ -236,6 +238,10 @@ class ImageViewerView extends RelativeLayout
 
     void setOnToggleOverlayViewListener(ImageViewer.OnToggleOverlayViewListener listener) {
         this.onToggleOverlayViewListener = listener;
+    }
+
+    void setOnViewBoundListener(ImageViewer.OnViewBoundListener listener) {
+        this.onViewBoundListener = listener;
     }
 
     boolean isOverlayViewVisible() {
