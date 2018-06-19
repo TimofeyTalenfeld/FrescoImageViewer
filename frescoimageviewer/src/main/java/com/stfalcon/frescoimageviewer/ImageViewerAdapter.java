@@ -122,13 +122,14 @@ class ImageViewerAdapter
             this.position = position;
 
             tryToSetHierarchy();
-            setController(dataSet.format(position));
-
-            drawee.setOnScaleChangeListener(this);
 
             if (onViewBoundListener != null) {
                 onViewBoundListener.onBound(drawee, position);
             }
+
+            setController(dataSet.format(position));
+
+            drawee.setOnScaleChangeListener(this);
         }
 
         @Override
