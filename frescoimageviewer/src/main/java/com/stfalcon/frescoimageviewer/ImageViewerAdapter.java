@@ -126,7 +126,9 @@ class ImageViewerAdapter
 
             drawee.setOnScaleChangeListener(this);
 
-            onViewBoundListener.onBound(drawee, position);
+            if (onViewBoundListener != null) {
+                onViewBoundListener.onBound(drawee, position);
+            }
         }
 
         @Override
