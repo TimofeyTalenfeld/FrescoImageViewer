@@ -30,6 +30,7 @@ import me.relex.photodraweeview.IAttacher;
 import me.relex.photodraweeview.OnPhotoTapListener;
 import me.relex.photodraweeview.OnScaleChangeListener;
 import me.relex.photodraweeview.OnViewTapListener;
+import me.relex.photodraweeview.Attacher;
 
 /*
  * Created by Alexander Krol (troy379) on 29.08.16.
