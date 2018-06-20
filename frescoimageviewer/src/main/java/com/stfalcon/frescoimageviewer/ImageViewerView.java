@@ -155,7 +155,7 @@ class ImageViewerView extends RelativeLayout
                 if (pager.isScrolled()) {
                     boolean performed = false;
                     if (onItemClickListener != null) {
-                        performed = onItemClickListener.onItemClicked(pager.getCurrentItem());
+                        performed = onItemClickListener.onItemClicked(pager.getCurrentItem(), e);
                     }
 
                     if (!performed) onClick(e, isOverlayWasClicked);

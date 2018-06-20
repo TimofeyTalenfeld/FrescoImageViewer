@@ -28,6 +28,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
@@ -179,7 +180,7 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
     }
 
     public interface OnItemClickListener {
-        boolean onItemClicked(int position);
+        boolean onItemClicked(int position, MotionEvent event);
     }
 
     private @StyleRes int getDialogStyle() {
