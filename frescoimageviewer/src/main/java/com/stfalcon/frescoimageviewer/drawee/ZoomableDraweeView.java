@@ -189,4 +189,8 @@ public class ZoomableDraweeView extends SimpleDraweeView implements IAttacher {
     public void update(int imageInfoWidth, int imageInfoHeight) {
         attacher.update(imageInfoWidth, imageInfoHeight);
     }
+
+    public NonInterceptableAttacher getAttacher() {
+        return attacher;
+    }
 }
